@@ -19,18 +19,20 @@ class WaterTank:
         height = self.measurements.get("height")
         if not all([length, width, height]):
             raise ValueError("Length, width, and height are required for square tank")
-        return self._cubic_units_to_gallons(length * width * height)
+        return _cubic_units_to_gallons(length * width * height)
 
     def _round_volume(self):
         radius = self.measurements.get("radius")
         height = self.measurements.get("height")
         if not all([radius, height]):
             raise ValueError("Radius and height are required for round tank")
-        return self._cubic_units_to_gallons(math.pi * (radius ** 2) * height)
+        return _cubic_units_to_gallons(math.pi * (radius ** 2) * height)
 
-    def _cubic_units_to_gallons(self, cubic_units):
-        # Conversion factor: 1 cubic foot = 7.48052 gallons
-        return cubic_units * 7.48052
+
+def _cubic_units_to_gallons(cubic_units):
+    # Conversion factor: 1 cubic foot = 7.48052 gallons
+    return cubic_units * 7.48052
+
 
 # Example usage
 square_tank = WaterTank(shape="square", length=2, width=3, height=4)
